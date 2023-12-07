@@ -4,7 +4,8 @@
   "info": {
     "singularName": "source",
     "pluralName": "sources",
-    "displayName": "Source"
+    "displayName": "Source",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -25,6 +26,22 @@
       "relation": "manyToOne",
       "target": "api::question.question",
       "inversedBy": "sources"
+    },
+    "Files": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Userid": {
+      "type": "string",
+      "required": true,
+      "unique": false
     }
   }
 }

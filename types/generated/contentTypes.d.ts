@@ -787,6 +787,7 @@ export interface ApiSourceSource extends Schema.CollectionType {
     singularName: 'source';
     pluralName: 'sources';
     displayName: 'Source';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -803,6 +804,8 @@ export interface ApiSourceSource extends Schema.CollectionType {
       'manyToOne',
       'api::question.question'
     >;
+    Files: Attribute.Media;
+    Userid: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -869,12 +872,13 @@ export interface ApiSubquestionSubquestion extends Schema.CollectionType {
     singularName: 'subquestion';
     pluralName: 'subquestions';
     displayName: 'Subquestion';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    Name: Attribute.String & Attribute.Required;
     question: Attribute.Relation<
       'api::subquestion.subquestion',
       'manyToOne',

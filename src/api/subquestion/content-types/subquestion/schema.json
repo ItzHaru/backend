@@ -4,7 +4,8 @@
   "info": {
     "singularName": "subquestion",
     "pluralName": "subquestions",
-    "displayName": "Subquestion"
+    "displayName": "Subquestion",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,7 +15,7 @@
     "Name": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "question": {
       "type": "relation",
