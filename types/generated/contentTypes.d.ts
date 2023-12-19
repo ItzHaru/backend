@@ -362,259 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCategoryCategory extends Schema.CollectionType {
-  collectionName: 'categories';
-  info: {
-    singularName: 'category';
-    pluralName: 'categories';
-    displayName: 'Category';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String & Attribute.Required & Attribute.Unique;
-    Logo: Attribute.Media & Attribute.Required;
-    questions: Attribute.Relation<
-      'api::category.category',
-      'manyToMany',
-      'api::question.question'
-    >;
-    sources: Attribute.Relation<
-      'api::category.category',
-      'manyToMany',
-      'api::source.source'
-    >;
-    subjects: Attribute.Relation<
-      'api::category.category',
-      'manyToMany',
-      'api::subject.subject'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::category.category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::category.category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiQuestionQuestion extends Schema.CollectionType {
-  collectionName: 'questions';
-  info: {
-    singularName: 'question';
-    pluralName: 'questions';
-    displayName: 'Question';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String & Attribute.Required & Attribute.Unique;
-    Slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    sources: Attribute.Relation<
-      'api::question.question',
-      'oneToMany',
-      'api::source.source'
-    >;
-    subquestions: Attribute.Relation<
-      'api::question.question',
-      'oneToMany',
-      'api::subquestion.subquestion'
-    >;
-    tasks: Attribute.Relation<
-      'api::question.question',
-      'oneToMany',
-      'api::task.task'
-    >;
-    categories: Attribute.Relation<
-      'api::question.question',
-      'manyToMany',
-      'api::category.category'
-    >;
-    subjects: Attribute.Relation<
-      'api::question.question',
-      'manyToMany',
-      'api::subject.subject'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::question.question',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::question.question',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSourceSource extends Schema.CollectionType {
-  collectionName: 'sources';
-  info: {
-    singularName: 'source';
-    pluralName: 'sources';
-    displayName: 'Source';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String;
-    categories: Attribute.Relation<
-      'api::source.source',
-      'manyToMany',
-      'api::category.category'
-    >;
-    question: Attribute.Relation<
-      'api::source.source',
-      'manyToOne',
-      'api::question.question'
-    >;
-    Files: Attribute.Media;
-    Userid: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::source.source',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::source.source',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSubjectSubject extends Schema.CollectionType {
-  collectionName: 'subjects';
-  info: {
-    singularName: 'subject';
-    pluralName: 'subjects';
-    displayName: 'Subject';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String & Attribute.Required & Attribute.Unique;
-    Slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    categories: Attribute.Relation<
-      'api::subject.subject',
-      'manyToMany',
-      'api::category.category'
-    >;
-    questions: Attribute.Relation<
-      'api::subject.subject',
-      'manyToMany',
-      'api::question.question'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::subject.subject',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::subject.subject',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSubquestionSubquestion extends Schema.CollectionType {
-  collectionName: 'subquestions';
-  info: {
-    singularName: 'subquestion';
-    pluralName: 'subquestions';
-    displayName: 'Subquestion';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String & Attribute.Required;
-    question: Attribute.Relation<
-      'api::subquestion.subquestion',
-      'manyToOne',
-      'api::question.question'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::subquestion.subquestion',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::subquestion.subquestion',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTaskTask extends Schema.CollectionType {
-  collectionName: 'tasks';
-  info: {
-    singularName: 'task';
-    pluralName: 'tasks';
-    displayName: 'Task';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String & Attribute.Required & Attribute.Unique;
-    Img: Attribute.Media;
-    question: Attribute.Relation<
-      'api::task.task',
-      'manyToOne',
-      'api::question.question'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -930,6 +677,259 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    Logo: Attribute.Media & Attribute.Required;
+    questions: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::question.question'
+    >;
+    sources: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::source.source'
+    >;
+    subjects: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::subject.subject'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiQuestionQuestion extends Schema.CollectionType {
+  collectionName: 'questions';
+  info: {
+    singularName: 'question';
+    pluralName: 'questions';
+    displayName: 'Question';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    Slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    sources: Attribute.Relation<
+      'api::question.question',
+      'oneToMany',
+      'api::source.source'
+    >;
+    subquestions: Attribute.Relation<
+      'api::question.question',
+      'oneToMany',
+      'api::subquestion.subquestion'
+    >;
+    tasks: Attribute.Relation<
+      'api::question.question',
+      'oneToMany',
+      'api::task.task'
+    >;
+    categories: Attribute.Relation<
+      'api::question.question',
+      'manyToMany',
+      'api::category.category'
+    >;
+    subjects: Attribute.Relation<
+      'api::question.question',
+      'manyToMany',
+      'api::subject.subject'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSourceSource extends Schema.CollectionType {
+  collectionName: 'sources';
+  info: {
+    singularName: 'source';
+    pluralName: 'sources';
+    displayName: 'Source';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    categories: Attribute.Relation<
+      'api::source.source',
+      'manyToMany',
+      'api::category.category'
+    >;
+    question: Attribute.Relation<
+      'api::source.source',
+      'manyToOne',
+      'api::question.question'
+    >;
+    Files: Attribute.Media;
+    Userid: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::source.source',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::source.source',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSubjectSubject extends Schema.CollectionType {
+  collectionName: 'subjects';
+  info: {
+    singularName: 'subject';
+    pluralName: 'subjects';
+    displayName: 'Subject';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    Slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    categories: Attribute.Relation<
+      'api::subject.subject',
+      'manyToMany',
+      'api::category.category'
+    >;
+    questions: Attribute.Relation<
+      'api::subject.subject',
+      'manyToMany',
+      'api::question.question'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::subject.subject',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::subject.subject',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSubquestionSubquestion extends Schema.CollectionType {
+  collectionName: 'subquestions';
+  info: {
+    singularName: 'subquestion';
+    pluralName: 'subquestions';
+    displayName: 'Subquestion';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    question: Attribute.Relation<
+      'api::subquestion.subquestion',
+      'manyToOne',
+      'api::question.question'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::subquestion.subquestion',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::subquestion.subquestion',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTaskTask extends Schema.CollectionType {
+  collectionName: 'tasks';
+  info: {
+    singularName: 'task';
+    pluralName: 'tasks';
+    displayName: 'Task';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required & Attribute.Unique;
+    Img: Attribute.Media;
+    question: Attribute.Relation<
+      'api::task.task',
+      'manyToOne',
+      'api::question.question'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -940,18 +940,18 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::category.category': ApiCategoryCategory;
-      'api::question.question': ApiQuestionQuestion;
-      'api::source.source': ApiSourceSource;
-      'api::subject.subject': ApiSubjectSubject;
-      'api::subquestion.subquestion': ApiSubquestionSubquestion;
-      'api::task.task': ApiTaskTask;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::category.category': ApiCategoryCategory;
+      'api::question.question': ApiQuestionQuestion;
+      'api::source.source': ApiSourceSource;
+      'api::subject.subject': ApiSubjectSubject;
+      'api::subquestion.subquestion': ApiSubquestionSubquestion;
+      'api::task.task': ApiTaskTask;
     }
   }
 }
