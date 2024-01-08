@@ -4,7 +4,8 @@
   "info": {
     "singularName": "task",
     "pluralName": "tasks",
-    "displayName": "Task"
+    "displayName": "Task",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,16 +13,17 @@
   "pluginOptions": {},
   "attributes": {
     "Name": {
-      "type": "string",
+      "type": "text",
       "required": true,
       "unique": true
     },
     "Img": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "question": {
       "type": "relation",
